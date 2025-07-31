@@ -1,0 +1,63 @@
+﻿@using Atividade6_Blazor.Shared;
+@using Atividade6_Blazor.Services;
+@using Atividade6_Blazor.Models;
+
+<div class="p-5">
+
+    <h3 >FormularioPedido</h3>
+
+    <ListaItensPedido itens="pedido.Itens"></ListaItensPedido>
+
+    <label for="cliente">Selecione o Cliente: </label>
+    <select @bind="@c_selecionado" class="form-select mb-3" aria-label="Default select example" id="cliente">
+        <option selected value="0">Open this select menu</option>
+        @foreach(var c in cliente)
+        {
+            <option value="@c.Id">@c.Nome</option>
+        }
+    </select>
+
+    <button @onclick="AdicionarPedido">Criar Pedido</button>
+
+    <button @onclick="CancelarPedido">Cancelar Pedido</button>
+
+</div>
+
+
+@code {
+
+    private ClienteService ClieServ = new ClienteService();
+    private PedidoService PedServ = new PedidoService();
+    private List<Cliente> cliente = new();
+    private int c_selecionado = 0;
+    private Pedido pedido = new Pedido();
+
+    [Parameter] public EventCallback<Pedido> AoAdicionar { get; set; }
+
+    [Parameter] public EventCallback AoCancelar { get; set; }
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Delay(1000);
+        cliente = ClieServ.ObterTodosClientes();
+    }
+
+    public void AdicionarPedido()
+    {
+        if (c_selecionado > 0 && pedido.Itens != null)
+        {
+            pedido.Cliente = ClieServ.ObterClientePorId(c_selecionado);
+
+            AoAdicionar.InvokeAsync(pedido);
+            pedido = new Pedido();
+        }
+        
+    }
+
+
+    public void CancelarPedido()
+    {
+        AoCancelar.InvokeAsync();
+    }
+}

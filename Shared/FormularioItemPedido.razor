@@ -1,0 +1,54 @@
+﻿@using Atividade6_Blazor.Shared;
+@using Atividade6_Blazor.Services;
+@using Atividade6_Blazor.Models;
+
+
+<label for="produto">Selecione o Produto</label>
+<select @bind="p_selecionado" class="form-select mb-3" aria-label="Default select example" id="produto">
+    <option selected value="0">Open this select menu</option>
+    @foreach (var p in Produtos)
+    {
+        <option value="@p.Id">@p.Nome</option>
+    }
+</select>
+
+<label for="quantidade">Quantidade</label>
+<input @bind="item.Quantidade" id="quantidade" class="w-100 mb-3" />
+
+<button @onclick="Adicionar">Adicionar Produto </button>
+
+<button @onclick="Cancelar">Cancelar </button>
+
+@code {
+    private ItemPedido item = new ItemPedido();
+
+    private ProdutoService ProdServ = new ProdutoService();
+    private List<Produto> Produtos = new();
+    private int p_selecionado = 0;
+
+    [Parameter] public EventCallback<ItemPedido> OnAdicionar { get; set; }
+    [Parameter] public EventCallback OnCancelar { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Delay(1000);
+        Produtos = ProdServ.ObterTodosProdutos();
+    }
+
+    public void Adicionar()
+    {
+        item.Produto = ProdServ.ObterProdutoPorId(p_selecionado);
+
+        if (item.Produto != null && item.Quantidade > 0)
+        {
+            OnAdicionar.InvokeAsync(item);
+            item = new ItemPedido();
+        }
+        
+    }
+
+    public void Cancelar()
+    {
+        OnCancelar.InvokeAsync();
+    }
+}

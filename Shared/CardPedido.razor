@@ -1,0 +1,42 @@
+﻿@using Atividade6_Blazor.Models;
+
+<div class="card mt-3 p-3">
+    <h4>Pedido @pedido.Id</h4>
+    <p><strong>Cliente:</strong> @pedido.Cliente?.Nome</p>
+    <p><strong>Data:</strong> @pedido.DataPedido.ToShortDateString()</p>
+    <p><strong>Total:</strong> @pedido.Total.ToString("C")</p>
+    
+    <p><strong>Itens:</strong></p>
+
+    <ul>
+        @foreach (var i in pedido.Itens)
+        {
+            <li><strong>Nome:</strong> @i.Produto.Nome || <strong>Quantidade:</strong> @i.Quantidade</li>
+        }
+    </ul>
+    
+
+    <button @onclick="Editar">Editar</button>
+    <button @onclick="Remover">Remover</button>
+</div>
+
+@code {
+    [Parameter] public Pedido pedido { get; set; }
+
+    [Parameter] public EventCallback<Pedido> OnEditar { get; set; }
+    [Parameter] public EventCallback<Pedido> OnRemover { get; set; }
+
+
+    public void Editar()
+    {
+        OnEditar.InvokeAsync(pedido);
+        pedido = new Pedido();
+    }
+
+    public void Remover()
+    {
+        OnRemover.InvokeAsync(pedido);
+        pedido = new Pedido();
+    }
+
+}

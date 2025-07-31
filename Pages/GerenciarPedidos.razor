@@ -1,0 +1,69 @@
+﻿@page "/gerenciar"
+@using Atividade6_Blazor.Shared;
+@using Atividade6_Blazor.Services;
+@using Atividade6_Blazor.Models;
+
+<h3>GerenciarPedidos</h3>
+
+
+
+@if (BtnCriar)
+{
+    <FormularioPedido AoAdicionar="AdicionarPedido" AoCancelar="CriarPedido"></FormularioPedido>
+}
+
+<button @onclick="CriarPedido">@mensagem</button>
+
+
+@foreach (var p in pedidos)
+{
+    <CardPedido pedido="p" OnRemover="RemoverPedido" OnEditar="EditarPedido"></CardPedido>
+}
+
+@code {
+    private PedidoService PedServ = new PedidoService();
+    private List<Pedido> pedidos = new();
+    private bool BtnCriar = false;
+    private string mensagem = "Criar Pedido";
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Delay(1000);
+        pedidos = PedServ.ObterTodosPedidos();
+    }
+
+    public void CriarPedido()
+    {
+        if (BtnCriar)
+        {
+            BtnCriar = false;
+            mensagem = "Criar Pedido";
+        }
+        else
+        {
+            BtnCriar = true;
+            mensagem = "Cancelar";
+        }
+    }
+
+    public void RemoverPedido(Pedido pedido)
+    {
+        PedServ.RemoverPedido(pedido);
+    }
+
+    public void EditarPedido(Pedido pedido)
+    {
+        PedServ.AtualizarPedido(pedido);
+    }
+
+    public void AdicionarPedido(Pedido pedido)
+    {
+        PedServ.AdicionarPedido(pedido);
+        CriarPedido();
+    }
+
+
+
+
+}

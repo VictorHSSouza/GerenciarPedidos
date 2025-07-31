@@ -1,0 +1,60 @@
+﻿@using Atividade6_Blazor.Shared;
+@using Atividade6_Blazor.Services;
+@using Atividade6_Blazor.Models;
+
+@if (formulario)
+{
+    <FormularioItemPedido OnAdicionar="AdicionarItem" OnCancelar="CancelarItem"></FormularioItemPedido>
+}else
+{
+    <button @onclick="NovoItem">Adicionar novo Item</button>
+}
+<table class="table-bordered table mt-3 mb-5">
+
+    <tr>
+        <td>Nome</td>
+        <td>Preço Unitário</td>
+        <td>Quantidade Pedida</td>
+        <td>Total</td>
+    </tr>
+
+    
+    @foreach (var i in itens)
+    {
+        <tr>
+            <td>@i.Produto.Nome</td>
+            <td>@i.Produto.Preco</td>
+            <td>@i.Quantidade</td>
+            <td>@i.Subtotal</td>
+        </tr>
+        
+    }
+    
+</table>
+
+
+
+@code {
+    [Parameter] public List<ItemPedido> itens { get; set; }
+
+    private bool formulario = false;
+
+
+    public void NovoItem()
+    {
+        formulario = true;
+    }
+
+    public void AdicionarItem(ItemPedido i)
+    {
+        itens.Add(i);
+        formulario = false;
+    }
+
+    public void CancelarItem()
+    {
+        formulario = false;
+    }
+
+
+}
