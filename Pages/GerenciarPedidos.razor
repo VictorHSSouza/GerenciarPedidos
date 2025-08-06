@@ -1,5 +1,4 @@
-﻿@page "/"
-@page "/gerenciar"
+﻿@page "/gerenciar"
 @using Atividade6_Blazor.Shared;
 @using Atividade6_Blazor.Services;
 @using Atividade6_Blazor.Models;
@@ -10,7 +9,7 @@
 
 @if (BtnCriar)
 {
-    <FormularioPedido AoAdicionar="AdicionarPedido" AoCancelar="CriarPedido"></FormularioPedido>
+    <FormularioPedido pedido="atualizar" AoAdicionar="AdicionarPedido" AoCancelar="CriarPedido"></FormularioPedido>
 }
 
 <button @onclick="CriarPedido">@mensagem</button>
@@ -18,26 +17,28 @@
 
 @foreach (var p in pedidos)
 {
-    <CardPedido pedido="p" OnRemover="RemoverPedido" OnEditar="EditarPedido"></CardPedido>
+    <CardPedido pedido="p" OnRemover="RemoverPedido" OnEditar="Atualizar"></CardPedido>
 }
 
 @code {
     private PedidoService PedServ = new PedidoService();
     private List<Pedido> pedidos = new();
+    private Pedido atualizar = new Pedido();
     private bool BtnCriar = false;
     private string mensagem = "Criar Pedido";
 
 
     protected override async Task OnInitializedAsync()
     {
-        await Task.Delay(1000);
         pedidos = PedServ.ObterTodosPedidos();
+        await Task.Delay(1000);
     }
 
     public void CriarPedido()
     {
         if (BtnCriar)
         {
+            atualizar = new Pedido();
             BtnCriar = false;
             mensagem = "Criar Pedido";
         }
@@ -53,14 +54,23 @@
         PedServ.RemoverPedido(pedido);
     }
 
-    public void EditarPedido(Pedido pedido)
+
+    public void Atualizar(Pedido pedido)
     {
-        PedServ.AtualizarPedido(pedido);
+        atualizar = pedido;
+        CriarPedido();
     }
 
     public void AdicionarPedido(Pedido pedido)
     {
-        PedServ.AdicionarPedido(pedido);
+        if(PedServ.ObterPedidoPorId(pedido.Id) != null)
+        {
+            PedServ.AtualizarPedido(pedido);
+        }
+        else
+        {
+            PedServ.AdicionarPedido(pedido);
+        }
         CriarPedido();
     }
 

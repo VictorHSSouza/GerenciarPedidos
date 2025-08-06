@@ -17,7 +17,7 @@
         }
     </select>
 
-    <button @onclick="AdicionarPedido">Criar Pedido</button>
+    <button @onclick="AdicionarPedido">@mensagem</button>
 
     <button @onclick="CancelarPedido">Cancelar Pedido</button>
 
@@ -30,17 +30,26 @@
     private PedidoService PedServ = new PedidoService();
     private List<Cliente> cliente = new();
     private int c_selecionado = 0;
-    private Pedido pedido = new Pedido();
+    private string mensagem = "Criar Pedido";
 
     [Parameter] public EventCallback<Pedido> AoAdicionar { get; set; }
 
+    [Parameter] public EventCallback<Pedido> AoAtualizar { get; set; }
+
     [Parameter] public EventCallback AoCancelar { get; set; }
 
+    [Parameter] public Pedido pedido { get; set; } = new Pedido();
 
     protected override async Task OnInitializedAsync()
     {
-        await Task.Delay(1000);
+        if (pedido.Cliente != null)
+        {
+            mensagem = "Atualizar Pedido";
+            c_selecionado = pedido.Cliente.Id ;
+        }
+        
         cliente = ClieServ.ObterTodosClientes();
+        await Task.Delay(1000);
     }
 
     public void AdicionarPedido()

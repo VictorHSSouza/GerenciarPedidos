@@ -31,8 +31,8 @@
 
     protected override async Task OnInitializedAsync()
     {
-        await Task.Delay(1000);
         Produtos = ProdServ.ObterTodosProdutos();
+        await Task.Delay(1000);
     }
 
     public void Adicionar()

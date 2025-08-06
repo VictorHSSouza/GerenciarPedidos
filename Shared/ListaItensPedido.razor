@@ -9,27 +9,31 @@
 {
     <button @onclick="NovoItem">Adicionar novo Item</button>
 }
-<table class="table-bordered table mt-3 mb-5">
 
-    <tr>
-        <td>Nome</td>
-        <td>Preço Unitário</td>
-        <td>Quantidade Pedida</td>
-        <td>Total</td>
-    </tr>
 
-    
-    @foreach (var i in itens)
-    {
+<table class="table table-bordered mt-3 mb-5">
+    <thead class="thead-dark">
         <tr>
-            <td>@i.Produto.Nome</td>
-            <td>@i.Produto.Preco</td>
-            <td>@i.Quantidade</td>
-            <td>@i.Subtotal</td>
+            <th scope="col">Nome</th>
+            <th scope="col">Preço Unitário</th>
+            <th scope="col">Quantidade Pedida</th>
+            <th scope="col">Total</th>
+            <th scope="col">Ações</th>
         </tr>
-        
-    }
-    
+    </thead>
+    <tbody>
+        @foreach (var i in itens)
+        {
+            <tr>
+                <td>@i.Produto.Nome</td>
+                <td>@i.Produto.Preco.ToString("C")</td>
+                <td>@i.Quantidade</td>
+                <td>@i.Subtotal.ToString("C")</td>
+                <td class=""><button @onclick="() => RemoverItem(i)">Remover</button></td>
+            </tr>
+
+        }
+    </tbody>
 </table>
 
 
@@ -47,8 +51,22 @@
 
     public void AdicionarItem(ItemPedido i)
     {
-        itens.Add(i);
+        ItemPedido existente = itens.Find(item => item.Produto.Id == i.Produto.Id);
+        if (existente == null)
+        {
+            itens.Add(i);
+        }
+        else
+        {
+            i.Quantidade += existente.Quantidade;
+            itens[itens.IndexOf(existente)] = i;
+        }
         formulario = false;
+    }
+
+    public void RemoverItem(ItemPedido i)
+    {
+        itens.Remove(i);
     }
 
     public void CancelarItem()
