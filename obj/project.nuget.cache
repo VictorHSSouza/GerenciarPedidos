@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "azxTZo/oITU=",
+  "dgSpecHash": "+hiYQU0uAcpPVwFfQN+yrfljjjkTcQ3YxFjKzkV9xWbLtgeaXGMWLexguFT+l1cbxHqYbyrFqBZHHUK020trFg==",
   "success": true,
   "projectFilePath": "H:\\Visual Studio 2022\\Projects\\Atividade6_Blazor\\Atividade6_Blazor.csproj",
   "expectedPackageFiles": [
@@ -28,10 +28,10 @@
     "C:\\Users\\monitor-victorhenrique\\.nuget\\packages\\microsoft.extensions.primitives\\8.0.0\\microsoft.extensions.primitives.8.0.0.nupkg.sha512",
     "C:\\Users\\monitor-victorhenrique\\.nuget\\packages\\microsoft.jsinterop\\8.0.11\\microsoft.jsinterop.8.0.11.nupkg.sha512",
     "C:\\Users\\monitor-victorhenrique\\.nuget\\packages\\microsoft.jsinterop.webassembly\\8.0.11\\microsoft.jsinterop.webassembly.8.0.11.nupkg.sha512",
-    "C:\\Users\\monitor-victorhenrique\\.nuget\\packages\\microsoft.net.illink.tasks\\8.0.11\\microsoft.net.illink.tasks.8.0.11.nupkg.sha512",
-    "C:\\Users\\monitor-victorhenrique\\.nuget\\packages\\microsoft.net.sdk.webassembly.pack\\9.0.0\\microsoft.net.sdk.webassembly.pack.9.0.0.nupkg.sha512",
+    "C:\\Users\\monitor-victorhenrique\\.nuget\\packages\\microsoft.net.illink.tasks\\8.0.0\\microsoft.net.illink.tasks.8.0.0.nupkg.sha512",
+    "C:\\Users\\monitor-victorhenrique\\.nuget\\packages\\microsoft.net.sdk.webassembly.pack\\8.0.0\\microsoft.net.sdk.webassembly.pack.8.0.0.nupkg.sha512",
     "C:\\Users\\monitor-victorhenrique\\.nuget\\packages\\system.io.pipelines\\8.0.0\\system.io.pipelines.8.0.0.nupkg.sha512",
-    "C:\\Users\\monitor-victorhenrique\\.nuget\\packages\\microsoft.netcore.app.runtime.mono.browser-wasm\\8.0.11\\microsoft.netcore.app.runtime.mono.browser-wasm.8.0.11.nupkg.sha512"
+    "C:\\Users\\monitor-victorhenrique\\.nuget\\packages\\microsoft.netcore.app.runtime.mono.browser-wasm\\8.0.0\\microsoft.netcore.app.runtime.mono.browser-wasm.8.0.0.nupkg.sha512"
   ],
   "logs": []
 }
