@@ -3,7 +3,7 @@
 @using Atividade6_Blazor.Services;
 @using Atividade6_Blazor.Models;
 
-<h3>GerenciarPedidos</h3>
+<h1>Gerenciar Pedidos</h1>
 
 
 
@@ -52,13 +52,14 @@
     public void RemoverPedido(Pedido pedido)
     {
         PedServ.RemoverPedido(pedido);
+        BtnCriar = false;
     }
 
 
     public void Atualizar(Pedido pedido)
     {
         atualizar = pedido;
-        CriarPedido();
+        BtnCriar = true;
     }
 
     public void AdicionarPedido(Pedido pedido)

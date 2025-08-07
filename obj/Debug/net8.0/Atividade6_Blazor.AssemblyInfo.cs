@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Atividade6_Blazor")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f62eebc52bab1de32b60cfd19bc5a667c5a868f8")]
 [assembly: System.Reflection.AssemblyProductAttribute("Atividade6_Blazor")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Atividade6_Blazor")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

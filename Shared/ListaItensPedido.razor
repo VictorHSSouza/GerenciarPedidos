@@ -4,7 +4,7 @@
 
 @if (formulario)
 {
-    <FormularioItemPedido OnAdicionar="AdicionarItem" OnCancelar="CancelarItem"></FormularioItemPedido>
+    <FormularioItemPedido item="alterarItem" OnAdicionar="AdicionarItem" OnCancelar="CancelarItem"></FormularioItemPedido>
 }else
 {
     <button @onclick="NovoItem">Adicionar novo Item</button>
@@ -29,7 +29,10 @@
                 <td>@i.Produto.Preco.ToString("C")</td>
                 <td>@i.Quantidade</td>
                 <td>@i.Subtotal.ToString("C")</td>
-                <td class=""><button @onclick="() => RemoverItem(i)">Remover</button></td>
+                <td class="">
+                    <button @onclick="() => RemoverItem(i)">Remover</button>
+                    <button @onclick="() => AtualizarItem(i)">Atualizar</button>
+                </td>
             </tr>
 
         }
@@ -40,6 +43,7 @@
 
 @code {
     [Parameter] public List<ItemPedido> itens { get; set; }
+    private ItemPedido alterarItem = new ItemPedido();
 
     private bool formulario = false;
 
@@ -48,6 +52,7 @@
     {
         formulario = true;
     }
+
 
     public void AdicionarItem(ItemPedido i)
     {
@@ -58,10 +63,16 @@
         }
         else
         {
-            i.Quantidade += existente.Quantidade;
+            i.Quantidade = existente.Quantidade;
             itens[itens.IndexOf(existente)] = i;
         }
         formulario = false;
+    }
+
+    public void AtualizarItem(ItemPedido i)
+    {
+        alterarItem = i;
+        NovoItem();
     }
 
     public void RemoverItem(ItemPedido i)

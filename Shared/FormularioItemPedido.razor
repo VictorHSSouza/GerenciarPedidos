@@ -15,23 +15,34 @@
 <label for="quantidade">Quantidade</label>
 <input @bind="item.Quantidade" id="quantidade" class="w-100 mb-3" />
 
-<button @onclick="Adicionar">Adicionar Produto </button>
+<button @onclick="Adicionar">@mensagem Produto </button>
 
 <button @onclick="Cancelar">Cancelar </button>
 
 @code {
-    private ItemPedido item = new ItemPedido();
+
 
     private ProdutoService ProdServ = new ProdutoService();
     private List<Produto> Produtos = new();
     private int p_selecionado = 0;
+    private string mensagem = "Adicionar";
 
+    [Parameter] public ItemPedido item { get; set; } = new ItemPedido();
     [Parameter] public EventCallback<ItemPedido> OnAdicionar { get; set; }
     [Parameter] public EventCallback OnCancelar { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
+
+        if (item.Produto != null)
+        {
+            p_selecionado = item.Produto.Id;
+            mensagem = "Alterar";
+
+        }
+
         Produtos = ProdServ.ObterTodosProdutos();
+
         await Task.Delay(1000);
     }
 
