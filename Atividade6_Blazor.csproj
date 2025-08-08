@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <PublishUrl>docs\</PublishUrl>
-    <BaseHref>/Atividade6_Blazor/</BaseHref>
+    <BaseHref>/GerenciarPedidos/</BaseHref>
   </PropertyGroup>
 
   <ItemGroup>

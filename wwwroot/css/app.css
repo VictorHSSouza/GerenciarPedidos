@@ -101,3 +101,50 @@ a, .btn-link {
 code {
     color: #c02d76;
 }
+
+
+/*Modificações Minhas*/
+
+
+/*About Me*/
+
+.profile-avatar {
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.card {
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+}
+
+
+/*Home*/
+.hero-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 15px;
+    margin: 20px;
+}
+
+    .hero-section .text-primary {
+        color: white !important;
+    }
+
+.card {
+    transition: transform 0.2s;
+    border: none;
+}
+
+    .card:hover {
+        transform: translateY(-5px);
+    }

@@ -29,9 +29,9 @@
                 <td>@i.Produto.Preco.ToString("C")</td>
                 <td>@i.Quantidade</td>
                 <td>@i.Subtotal.ToString("C")</td>
-                <td class="">
-                    <button @onclick="() => RemoverItem(i)">Remover</button>
-                    <button @onclick="() => AtualizarItem(i)">Atualizar</button>
+                <td>
+                    <button class="btn-danger" @onclick="() => RemoverItem(i)">Remover</button>
+                    <button class="btn-warning" @onclick="() => AtualizarItem(i)">Atualizar</button>
                 </td>
             </tr>
 

@@ -1,25 +1,60 @@
-# Atividade6 Blazor
+# 📦 Gerenciar Pedidos
 
-Este é um projeto Blazor WebAssembly configurado para deploy automático no GitHub Pages.
+Sistema completo para gerenciamento de pedidos, clientes e produtos desenvolvido em Blazor WebAssembly.
 
-## Como usar
+## 🚀 Demo
 
-1. Faça push do código para o repositório GitHub
-2. O GitHub Actions irá automaticamente fazer o build e deploy para GitHub Pages
-3. Acesse sua aplicação em: `https://[seu-usuario].github.io/Atividade6_Blazor/`
+Acesse a aplicação: [https://victorhssouza.github.io/GerenciarPedidos/](https://victorhssouza.github.io/GerenciarPedidos/)
 
-## Desenvolvimento Local
+## ✨ Funcionalidades
 
-Para executar localmente:
+- 🛒 **Gerenciamento de Pedidos**: Criação e controle completo de pedidos
+- 👥 **Cadastro de Clientes**: Organização de informações dos clientes
+- 📋 **Catálogo de Produtos**: Manutenção do inventário de produtos
+- 📱 **Interface Responsiva**: Design moderno e adaptável
+- ⚡ **Deploy Automático**: CI/CD com GitHub Actions
+
+## 🛠️ Tecnologias
+
+- **Frontend**: Blazor WebAssembly
+- **Framework**: .NET 8.0
+- **Styling**: Bootstrap 5
+- **Deploy**: GitHub Pages
+- **CI/CD**: GitHub Actions
+
+## 🏃‍♂️ Desenvolvimento Local
 
 ```bash
+# Clone o repositório
+git clone https://github.com/victorhssouza/GerenciarPedidos.git
+
+# Navegue até o diretório
+cd GerenciarPedidos
+
+# Execute a aplicação
 dotnet run
 ```
 
-## Deploy Manual
+## 📦 Deploy
 
-Para fazer deploy manual:
+O deploy é automático via GitHub Actions:
+
+1. Faça push para a branch `main`
+2. GitHub Actions executa o build e deploy
+3. Aplicação fica disponível no GitHub Pages
+
+### Deploy Manual
 
 ```bash
 dotnet publish -c Release -o release
 ```
+
+## 👨‍💻 Autor
+
+**Victor Souza**
+- GitHub: [@victorhssouza](https://github.com/victorhssouza)
+- Portfólio: [victorhssouza.github.io](https://victorhssouza.github.io)
+
+## 📄 Licença
+
+Este projeto está sob a licença MIT.
