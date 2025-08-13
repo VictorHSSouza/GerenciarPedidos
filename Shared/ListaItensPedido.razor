@@ -2,42 +2,106 @@
 @using Atividade6_Blazor.Services;
 @using Atividade6_Blazor.Models;
 
-@if (formulario)
-{
-    <FormularioItemPedido item="alterarItem" OnAdicionar="AdicionarItem" OnCancelar="CancelarItem"></FormularioItemPedido>
-}else
-{
-    <button @onclick="NovoItem">Adicionar novo Item</button>
-}
-
-
-<table class="table table-bordered mt-3 mb-5">
-    <thead class="thead-dark">
-        <tr>
-            <th scope="col">Nome</th>
-            <th scope="col">Preço Unitário</th>
-            <th scope="col">Quantidade Pedida</th>
-            <th scope="col">Total</th>
-            <th scope="col">Ações</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var i in itens)
+<div class="p-3">
+    <!-- Botão Adicionar Item -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h6 class="text-muted mb-0">
+            @if (itens.Any())
+            {
+                <span>@itens.Count item(s) adicionado(s)</span>
+            }
+            else
+            {
+                <span>Nenhum item adicionado</span>
+            }
+        </h6>
+        
+        @if (!formulario)
         {
-            <tr>
-                <td>@i.Produto.Nome</td>
-                <td>@i.Produto.Preco.ToString("C")</td>
-                <td>@i.Quantidade</td>
-                <td>@i.Subtotal.ToString("C")</td>
-                <td>
-                    <button class="btn-danger" @onclick="() => RemoverItem(i)">Remover</button>
-                    <button class="btn-warning" @onclick="() => AtualizarItem(i)">Atualizar</button>
-                </td>
-            </tr>
-
+            <button class="btn btn-primary btn-sm" @onclick="NovoItem">
+                <i class="bi bi-plus-circle me-1"></i>Adicionar Item
+            </button>
         }
-    </tbody>
-</table>
+    </div>
+    
+    <!-- Formulário de Item -->
+    @if (formulario)
+    {
+        <div class="mb-4">
+            <FormularioItemPedido item="alterarItem" OnAdicionar="AdicionarItem" OnCancelar="CancelarItem"></FormularioItemPedido>
+        </div>
+    }
+    
+    <!-- Tabela de Itens -->
+    @if (itens.Any())
+    {
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead class="table-primary">
+                    <tr>
+                        <th scope="col" class="fw-semibold">
+                            <i class="bi bi-box me-1"></i>Produto
+                        </th>
+                        <th scope="col" class="fw-semibold text-center">
+                            <i class="bi bi-currency-dollar me-1"></i>Preço Unit.
+                        </th>
+                        <th scope="col" class="fw-semibold text-center">
+                            <i class="bi bi-123 me-1"></i>Qtd.
+                        </th>
+                        <th scope="col" class="fw-semibold text-center">
+                            <i class="bi bi-calculator me-1"></i>Subtotal
+                        </th>
+                        <th scope="col" class="fw-semibold text-center">
+                            <i class="bi bi-gear me-1"></i>Ações
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var i in itens)
+                    {
+                        <tr class="table-row-hover">
+                            <td class="fw-medium">@i.Produto.Nome</td>
+                            <td class="text-center text-muted">@i.Produto.Preco.ToString("C")</td>
+                            <td class="text-center">
+                                <span class="badge bg-secondary">@i.Quantidade</span>
+                            </td>
+                            <td class="text-center fw-bold text-success">@i.Subtotal.ToString("C")</td>
+                            <td class="text-center">
+                                <div class="btn-group btn-group-sm">
+                                    <button class="btn btn-outline-warning" @onclick="() => AtualizarItem(i)" title="Editar">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                    <button class="btn btn-outline-danger" @onclick="() => RemoverItem(i)" title="Remover">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot class="table-light">
+                    <tr>
+                        <td colspan="3" class="text-end fw-bold">Total Geral:</td>
+                        <td class="text-center fw-bold text-success fs-5">
+                            @itens.Sum(x => x.Subtotal).ToString("C")
+                        </td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    }
+    else if (!formulario)
+    {
+        <div class="text-center py-4 text-muted">
+            <i class="bi bi-cart-x display-4 d-block mb-2"></i>
+            <p class="mb-0">Nenhum item foi adicionado ao pedido</p>
+            <small>Clique em "Adicionar Item" para começar</small>
+        </div>
+    }
+</div>
+
+
 
 
 
@@ -50,6 +114,7 @@
 
     public void NovoItem()
     {
+        alterarItem = new ItemPedido();
         formulario = true;
     }
 
@@ -65,6 +130,7 @@
         {
             i.Quantidade = existente.Quantidade;
             itens[itens.IndexOf(existente)] = i;
+            alterarItem = new ItemPedido();
         }
         formulario = false;
     }

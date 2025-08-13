@@ -1,24 +1,65 @@
 ﻿@using Atividade6_Blazor.Models;
 
-<div class="card mt-3 p-3">
-    <h4>Pedido @pedido.Id</h4>
-    <p><strong>Cliente:</strong> @pedido.Cliente?.Nome</p>
-    <p><strong>Data:</strong> @pedido.DataPedido.ToShortDateString()</p>
-    <p><strong>Total:</strong> @pedido.Total.ToString("C")</p>
+<div class="card card-pedido h-100 shadow-sm border-0">
+    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">
+            <i class="bi bi-receipt me-2"></i>Pedido #@pedido.Id
+        </h5>
+        <span class="badge bg-light text-primary">@pedido.Itens.Count item(s)</span>
+    </div>
     
-    <p><strong>Itens:</strong></p>
-
-    <ul>
-        @foreach (var i in pedido.Itens)
-        {
-            <li><strong>Nome:</strong> @i.Produto.Nome || <strong>Quantidade:</strong> @i.Quantidade</li>
-        }
-    </ul>
+    <div class="card-body">
+        <div class="row mb-3">
+            <div class="col-6">
+                <small class="text-muted d-block">Cliente</small>
+                <strong class="text-dark">@pedido.Cliente?.Nome</strong>
+            </div>
+            <div class="col-6 text-end">
+                <small class="text-muted d-block">Data</small>
+                <strong class="text-dark">@pedido.DataPedido.ToShortDateString()</strong>
+            </div>
+        </div>
+        
+        <div class="mb-3 text-center">
+            <span class="badge @GetStatusClass(pedido.Status) fs-6 px-3 py-2">
+                @GetStatusIcon(pedido.Status) @pedido.Status
+            </span>
+        </div>
+        
+        <div class="mb-3">
+            <small class="text-muted d-block mb-2">Itens do Pedido</small>
+            <div class="list-group list-group-flush">
+                @foreach (var i in pedido.Itens)
+                {
+                    <div class="list-group-item border-0 px-0 py-1">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="text-dark">@i.Produto.Nome</span>
+                            <small class="text-muted">@i.Quantidade x</small>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        
+        <div class="text-center py-2 bg-light rounded">
+            <small class="text-muted d-block">Total do Pedido</small>
+            <h4 class="text-success mb-0">@pedido.Total.ToString("C")</h4>
+        </div>
+    </div>
     
-
-    <button @onclick="Editar">Editar</button>
-    <button @onclick="Remover">Remover</button>
+    <div class="card-footer bg-white border-0">
+        <div class="d-flex gap-2">
+            <button class="btn btn-outline-primary btn-sm flex-fill" @onclick="Editar">
+                <i class="bi bi-pencil me-1"></i>Editar
+            </button>
+            <button class="btn btn-outline-danger btn-sm flex-fill" @onclick="Remover">
+                <i class="bi bi-trash me-1"></i>Remover
+            </button>
+        </div>
+    </div>
 </div>
+
+
 
 @code {
     [Parameter] public Pedido pedido { get; set; }
@@ -37,6 +78,30 @@
     {
         OnRemover.InvokeAsync(pedido);
         pedido = new Pedido();
+    }
+
+    private string GetStatusClass(string status)
+    {
+        return status switch
+        {
+            "Pendente" => "bg-warning text-dark",
+            "Processando" => "bg-info text-white",
+            "Concluído" => "bg-success text-white",
+            "Cancelado" => "bg-danger text-white",
+            _ => "bg-secondary text-white"
+        };
+    }
+
+    private string GetStatusIcon(string status)
+    {
+        return status switch
+        {
+            "Pendente" => "⏳",
+            "Processando" => "🔄",
+            "Concluído" => "✅",
+            "Cancelado" => "❌",
+            _ => "📋"
+        };
     }
 
 }

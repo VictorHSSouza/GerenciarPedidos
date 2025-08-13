@@ -6,7 +6,7 @@
 
 <PageTitle>Gerenciar Pedidos</PageTitle>
 
-<div class="container-fluid py-4">
+<div class="container-fluid py-4 gerenciar-pedidos">
     <!-- Header Section -->
     <div class="row mb-4">
         <div class="col-12">
@@ -91,24 +91,7 @@
     </div>
 </div>
 
-<style>
-    .card {
-        transition: all 0.3s ease;
-    }
-    
-    .card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 25px rgba(0,0,0,0.1) !important;
-    }
-    
-    .btn {
-        transition: all 0.2s ease;
-    }
-    
-    .display-5 {
-        font-weight: 700;
-    }
-</style>
+
 
 @code {
     private PedidoService PedServ = new PedidoService();

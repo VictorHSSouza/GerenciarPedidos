@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "Atividade6_Blazor",
   "resources": {
-    "hash": "sha256-0sQPnvgWydjY+KUQiv7rC3a7wrqLlTnSeG5qDp2ia8s=",
+    "hash": "sha256-p0pDWlKQosvouq+m6AcPFs05Suf3J5Ty5BAsEra4bts=",
     "jsModuleNative": {
       "dotnet.native.8.0.0.kasqv8t0hf.js": "sha256-LjLDIz9+J7uuiwMlQ4HbNx2BnSpphOtO2MwkoI28vdI="
     },
@@ -208,10 +208,10 @@
       "mscorlib.wasm": "sha256-cDuLeL3OCtVtiid/dyex1MVgbuzDSRwZxKzuP2Dp4mg=",
       "netstandard.wasm": "sha256-A0h86SDieTMoU/wU2JTszWCsUmMuguDcbap0b0BzsmI=",
       "System.Private.CoreLib.wasm": "sha256-/0DNIm/T0C07X7Tuz5uR8JvVCoAfEE2MnfPUSjyS9xc=",
-      "Atividade6_Blazor.wasm": "sha256-zKcfPS8pdtmkTKaC+PIyrFBGx4raMJ3Lj5K4TqIFD/s="
+      "Atividade6_Blazor.wasm": "sha256-Yeq2oFxs5mANp5YACkBhN2hhS4n36wRcpOqkUdH5bQM="
     },
     "pdb": {
-      "Atividade6_Blazor.pdb": "sha256-fiZiz3ONzewEVFDuJ9Mjdmx8Wc3lg82WniptmKonu7I="
+      "Atividade6_Blazor.pdb": "sha256-2NhVyWPWu/z9xqX6mdCb6B0pKYiJTFE9BRQkykQOil0="
     }
   },
   "cacheBootResources": true,
